@@ -1,15 +1,26 @@
-import { Controller, Get,Post,Put, Delete, Res, HttpStatus, Body, Param, NotFoundException, Query } from '@nestjs/common';
+import { Controller, Get,Post,Put, Delete, Res, HttpStatus, Body, Param, NotFoundException, Query, UseGuards,Headers } from '@nestjs/common';
 
 import { CreateGastoDTO } from './dto/gasto.dto';
 import { GastoService } from './gasto.service';
+import { JwtAuthGuard } from 'src/auth/jwt-guard';
+import { JwtService } from '@nestjs/jwt';
 
+
+
+@UseGuards(JwtAuthGuard)
 @Controller('gasto')
 export class GastoController {
 
-    constructor(private gastoService:GastoService){}
+    constructor(private gastoService:GastoService,
+        private jwtService:JwtService){}
 
     @Post('/create')
-    async createGasto(@Res() res, @Body() createGastoDTO:CreateGastoDTO){
+    async createGasto(@Res() res, @Body() createGastoDTO:CreateGastoDTO,@Headers('authorization') authorization: string){
+        
+        const token = authorization.split(' ')[1];
+        const tokenDecenciptado=this.jwtService.verify(token);
+        createGastoDTO.usuario_id=tokenDecenciptado.id
+
         const gasto= await this.gastoService.createGasto(createGastoDTO);
         return res.status(HttpStatus.OK).json({
             message: "Gasto Creado Exitosamente",
