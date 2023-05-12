@@ -1,1 +1,19 @@
-<p>registrar works!</p>
+<!-- registrar.component.html -->
+
+<div>
+    <label for="nombre">Nombre:</label>
+    <input type="text" id="nombre" name="nombre" [(ngModel)]="nombre">
+  </div>
+  
+  <div>
+    <label for="correo">Correo electrónico:</label>
+    <input type="email" id="correo" name="correo" [(ngModel)]="correo">
+  </div>
+  
+  <div>
+    <label for="contraseña">Contraseña:</label>
+    <input type="password" id="contraseña" name="contraseña" [(ngModel)]="contrasena">
+  </div>
+  
+  <button (click)="registrar()">Registrar</button>
+  

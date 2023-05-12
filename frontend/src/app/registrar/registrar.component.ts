@@ -1,3 +1,5 @@
+// registrar.component.ts
+
 import { Component } from '@angular/core';
 
 @Component({
@@ -6,5 +8,19 @@ import { Component } from '@angular/core';
   styleUrls: ['./registrar.component.css']
 })
 export class RegistrarComponent {
+
+  nombre: string;
+  correo: string;
+  contrasena: string;
+
+  constructor() {
+    this.nombre = '';
+    this.correo = '';
+    this.contrasena = '';
+  }
+
+  registrar() {
+    console.log(`Usuario ${this.nombre} registrado con éxito.`);
+  }
 
 }
