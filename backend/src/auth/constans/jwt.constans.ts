@@ -1,3 +1,5 @@
+import { configConstants } from "src/config/envConfig";
+
 export const jwtConstants = {
-    secret: 'Hola',
+    secret: configConstants.JWT_SECRET,
   };

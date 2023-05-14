@@ -1,0 +1,61 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-deployment
+  labels:
+    app: backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      containers:
+      - name: backend
+        image: mathiryan/backend:1.1
+        ports:
+          - containerPort: 3000
+
+        env:
+          - name: PORT
+            value: "3000"
+
+          - name: MONGODB_DATABASE
+            valueFrom:
+              configMapKeyRef:
+                name: mongodb-config
+                key: DB_NAME
+
+          - name: MONGODB_IP
+            valueFrom:
+              configMapKeyRef:
+                name: mongodb-config
+                key: DB_HOST
+              
+          - name: MONGODB_PORT
+            valueFrom:
+              configMapKeyRef:
+                name: mongodb-config
+                key: DB_PORT
+
+          - name: MONGODB_USERNAME
+            valueFrom:
+              secretKeyRef:
+                name: mongodb-secret
+                key: username
+
+          - name: MONGODB_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: mongodb-secret
+                key: password
+
+          - name: JWT_SECRET
+            valueFrom:
+              secretKeyRef:
+                name: backend-secret
+                key: jwt-secret

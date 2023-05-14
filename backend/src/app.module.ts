@@ -4,12 +4,14 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { AppService } from './app.service';
 import { GastoModule } from './gasto/gasto.module';
 import { AuthModule } from './auth/auth.module';
+import { configConstants } from './config/envConfig';
 
 
 
 @Module({
   imports: [GastoModule,
-    MongooseModule.forRoot('mongodb+srv://dbriones:1234@base.ksmncfn.mongodb.net/Finanzas?retryWrites=true&w=majority'),
+    MongooseModule.forRoot(`mongodb://${configConstants.MONGODB_USERNAME}:${configConstants.MONGODB_PASSWORD}`
+      +`@${configConstants.MONGODB_IP}:${configConstants.MONGODB_PORT}/${configConstants.MONGODB_DATABASE}?authMechanism=DEFAULT&authSource=admin`),
     AuthModule
   ],
   controllers: [AppController],
