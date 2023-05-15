@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: frontend-deployment
   labels:
-    app: backend
+    app: frontend
 spec:
   replicas: 1
   selector:
@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
       - name: frontend
-        image: tu_usuario/frontend:1.0
+        image: mathiryan/frontend:1.0
         ports:
         - containerPort: 80
