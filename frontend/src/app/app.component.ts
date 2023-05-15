@@ -1,16 +1,13 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { AuthService } from './services/auth.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'my-app';
-
-  constructor(private router: Router) {
-    this.router.navigate(['/login']); // Redirige a la ruta de inicio (login)
-    this.router.navigate(['/registrar']);
-  }
+  title = 'Trabajo autonomo';
+  sideNavStatus: boolean= true;
+  constructor(public authService: AuthService) {}
 }

@@ -1,28 +1,46 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LoginComponent } from './login/login.component';
-import { RegistrarComponent } from './registrar/registrar.component';
-import { AuthService } from './services/auth.service';
-import { FormsModule } from '@angular/forms';
+
+import { HttpClientModule } from '@angular/common/http';
+import { AngularEditorModule } from '@kolkov/angular-editor';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { PdfViewerModule } from 'ng2-pdf-viewer';
+import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
 
 
 
+import { HeaderComponent } from './components/header/header.component';
+import { LoginComponent } from './components/login/login.component';
+import { FinanzaComponent } from './components/finanza/finanza.component';
+import { RegistroComponent } from './components/registro/registro.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    HeaderComponent,
     LoginComponent,
-    RegistrarComponent
+    FinanzaComponent,
+    RegistroComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    HttpClientModule,
+    ReactiveFormsModule,
+    AngularEditorModule,
+    NgxPaginationModule,
+    FormsModule,
+    PdfViewerModule
+
   ],
-  providers: [AuthService],
+  providers: [ 
+    { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
+    JwtHelperService,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
