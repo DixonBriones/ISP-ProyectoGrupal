@@ -18,6 +18,7 @@ import { jwtConstants } from 'src/auth/constans/jwt.constans';
     })
   ],
   controllers: [PresupuestoController],
-  providers: [PresupuestoService,JwtStrategy]
+  providers: [PresupuestoService,JwtStrategy],
+  exports: [PresupuestoService]
 })
 export class PresupuestoModule {}

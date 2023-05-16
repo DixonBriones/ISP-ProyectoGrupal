@@ -5,7 +5,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { UsuarioSchema } from './schemas/usuario.schema';
 import { JwtModule } from '@nestjs/jwt';
 import { jwtConstants } from './constans/jwt.constans';
-
+import { PresupuestoModule } from 'src/presupuesto/presupuesto.module';
 
 @Module({
   imports:[
@@ -15,7 +15,8 @@ import { jwtConstants } from './constans/jwt.constans';
     JwtModule.register({
       secret:jwtConstants.secret,
       signOptions:{expiresIn:'1d'}
-    })
+    }),
+    PresupuestoModule
   ],
   controllers: [AuthController],
   providers: [AuthService]
