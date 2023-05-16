@@ -1,0 +1,15 @@
+global:
+  scrape_interval: 15s # Intervalo de raspado de métricas
+
+scrape_configs:
+  - job_name: 'backend'
+    static_configs:
+      - targets: ['backend-service:3000'] # Nombre del servicio de backend en Kubernetes
+    metrics_path: '/metrics' # Ruta donde el backend expone las métricas
+    scheme: 'http' # Protocolo utilizado para acceder al backend (http o https)
+
+  - job_name: 'frontend'
+    static_configs:
+      - targets: ['frontend-service:4200'] # Nombre del servicio de frontend en Kubernetes
+    metrics_path: '/metrics' # Ruta donde el frontend expone las métricas
+    scheme: 'http' # Protocolo utilizado para acceder al frontend (http o https)
