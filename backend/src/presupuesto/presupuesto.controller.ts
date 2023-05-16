@@ -55,6 +55,15 @@ export class PresupuestoController {
         });
     }
 
+    @Get('usuario/:usuarioID')
+    async getPresupuestoUsuario(@Res() res:any, @Param('usuarioID') usuarioID:string){
+        const presupuesto= await this.presupuestoService.getPresupuestoUser(usuarioID);
+        if(!presupuesto) throw new NotFoundException('Presupuesto no existe');
+        return res.status(HttpStatus.OK).json({
+          presupuesto:presupuesto
+        });
+    }
+
     @Delete('/delete')
     async deletePresupuesto(@Res() res:any, @Query('presupuestoID') presupuestoID:string){
         const presupuesto= await this.presupuestoService.deletePresupuesto(presupuestoID);

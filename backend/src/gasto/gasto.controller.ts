@@ -35,6 +35,14 @@ export class GastoController {
         });
     }
 
+    @Get('usuario/:usuarioID')
+    async getGastoUsuario(@Res() res, @Param('usuarioID') usuarioID){
+        const gasto= await this.gastoService.getGastosUsuario(usuarioID);
+        return res.status(HttpStatus.OK).json({
+            gastos:gasto
+        });
+    }
+
     @Get('/:gastoID')
     async getGasto(@Res() res, @Param('gastoID') gastoID){
         const gasto= await this.gastoService.getGasto(gastoID);

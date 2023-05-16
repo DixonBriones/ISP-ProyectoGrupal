@@ -4,5 +4,5 @@ metadata:
   name: mongodb-config
 data:
   DB_NAME: "Finanzas"
-  DB_HOST: "165.232.156.248"
+  DB_HOST: "143.198.73.141"
   DB_PORT: "32717"

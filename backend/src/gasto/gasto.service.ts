@@ -16,6 +16,11 @@ export class GastoService {
         return gastos;
     }
 
+    async getGastosUsuario(usuario_id: string): Promise<Gasto[]>{
+        const gasto= await this.gastoModel.find({usuario_id});
+        return gasto;
+    }
+
     async getGasto(gastoID: string): Promise<Gasto>{
         const gasto= await this.gastoModel.findById(gastoID);
         return gasto;

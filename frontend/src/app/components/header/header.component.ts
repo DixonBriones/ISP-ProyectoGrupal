@@ -1,6 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Component({
   selector: 'app-header',
@@ -8,19 +9,19 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-  @Output() sideNavToggled= new EventEmitter<boolean>();
-  menuStatus: boolean= false;
+  name:any;
 
-  constructor(public authService: AuthService, private router: Router) { }
+  constructor(public authService: AuthService, private router: Router,private jwtHelper: JwtHelperService) { }
 
   ngOnInit(): void {
+    this.obtenerNombre();
   }
 
-  SideNavToggle(){
-    this.menuStatus= !this.menuStatus;
-    this.sideNavToggled.emit(this.menuStatus);
+  obtenerNombre(){
+    const token:any = localStorage.getItem('token');
+    const decodedToken = this.jwtHelper.decodeToken(token);
+    this.name=decodedToken.name;
   }
-
   cerrarsesion(){
     localStorage.removeItem('token');
     this.router.navigate(['login']);

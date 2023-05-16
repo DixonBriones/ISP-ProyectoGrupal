@@ -16,6 +16,11 @@ export class PresupuestoService {
         return presupuestos;
     }
 
+    async getPresupuestoUser(usuario_id: string): Promise<Presupuesto>{
+        const presupuesto=await this.presupuestoModel.findOne({usuario_id})
+        return presupuesto;
+    }
+
     async getPresupuesto(presupuestoID: string): Promise<Presupuesto>{
         const getPresupuesto= await this.presupuestoModel.findById(presupuestoID);
         return getPresupuesto;
